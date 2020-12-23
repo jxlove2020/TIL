@@ -37,10 +37,12 @@ input[type="number"]:hover {
   margin-top: 2px;
   margin-left: 5px;
 }
+
 .myButton:hover {
   background: linear-gradient(to bottom, #bc80ea 5%, #dfbdfa 100%);
   background-color: #bc80ea;
 }
+
 .myButton:active {
   position: relative;
   top: 1px;
