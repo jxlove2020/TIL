@@ -65,7 +65,7 @@ var asyncCall = function(e) {
             }
         }
 
-        if( Math.abs( clickLine - clickBox)  === 2 ) {
+        if( Math.abs( clickLine - clickBox )  === 2 ||  clickLine - clickBox === 0 ) {
             if (
                 boxes[0][2].textContent === turn &&
                 boxes[1][1].textContent === turn &&
