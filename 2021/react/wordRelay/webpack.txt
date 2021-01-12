@@ -1,0 +1,54 @@
+node 와 npm 이 설치 되어있어야 한다. 
+npm init
+- author 이름 / license MIT 외 모두 엔터
+마지막 yes 하면 package.json 파일 생성
+
+npm 이 react , react-dom 설치
+> npm i react react-dom
+
+webpack 과 webpack-cli 설치
+> npm i -D webpack webpack-cli
+-D : 개발시 사용 : 실제 서비스에서는 웹팩이 필요없음 
+
+@babel/core (바벨 기본적) 과 
+@babel/preset-env (브라우저에 맞게 최신문법 지원) 
+@babel/preset-react (jsx 지원)
+babel-loader (바벨이랑 webpack 연결)
+@babel/plugin-proposal-class-properties (state 사용하려면)
+설치
+> npm i -D @babel/core 
+> npm i -D @babel/preset-env
+> npm i -D @babel/preset-react
+> npm i -D babel-loader
+> npm i -D @babel/plugin-proposal-class-properties
+
+webpack.config.js 설정 적용
+
+
+폴더에 파일 생성
+webpack.config.js 파일
+    module.exports = {
+
+    }
+
+client.jsx 파일
+    const React = Require('react');
+    const ReactDom = Require('react-dom');
+    
+    // class : 클래스 이름 대문자로 시작
+    class 클래스이름 extends React.Component {
+        state = {
+        };
+
+        render() {
+        }
+    } 
+    ReactDom.render(<클래스이름 />, document.querySelector('#root'));
+    추가
+index.html 파일
+    head 에 넣던 react 와 react-dom, babel 을 안불러와도 됩니다. 
+    body 태그 아래에 작성
+    <div id="root"></div>
+    <script src="./dist/app.js"></script>
+    
+
