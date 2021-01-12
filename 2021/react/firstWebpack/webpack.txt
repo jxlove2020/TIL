@@ -1,0 +1,31 @@
+node 와 npm 이 설치 되어있어야 한다. 
+npm init
+- author 이름 / license MIT 외 모두 엔터
+마지막 yes 하면 package.json 파일 생성
+
+npm 이 react , react-dom 설치
+> npm i react react-dom
+
+webpack 과 webpack-cli 설치
+> npm i -D webpack webpack-cli
+-D : 개발시 사용 : 실제 서비스에서는 웹팩이 필요없음 
+
+폴더에 파일 생성
+webpack.config.js 파일
+    module.exports = {
+
+    }
+
+client.jsx 파일
+    const React = Require('react');
+    const ReactDom = Require('react-dom');
+
+index.html 파일
+    head 에 넣던 react 와 react-dom, babel 을 안불러와도 됩니다. 
+    body 태그 아래에 작성
+    <div id="root"></div>
+    <script src="./dist/app.js"></script>
+    class 함수와 
+    ReactDom.render(<WordReplay />, document.querySelector('#root'));
+    추가
+
