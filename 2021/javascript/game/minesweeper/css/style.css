@@ -1,0 +1,19 @@
+#table {
+  border-collapse: collapse;
+}
+#table td {
+  border: 1px solid #000;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  background: #eee;
+}
+#table td.opened {
+  background: #fff;
+}
+#table td.flag {
+  background: crimson;
+}
+#table td.question {
+  background: orange;
+}

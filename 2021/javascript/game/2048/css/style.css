@@ -1,0 +1,12 @@
+#table {
+  border-collapse: collapse;
+  user-select: none;
+}
+#table td {
+  border: 1px solid #000;
+  width: 150px;
+  height: 150px;
+  font-size: 30px;
+  font-weight: bold;
+  text-align: center;
+}

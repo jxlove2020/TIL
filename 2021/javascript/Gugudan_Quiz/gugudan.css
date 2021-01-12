@@ -1,0 +1,49 @@
+body {
+  margin: 0 auto;
+  text-align: center;
+}
+
+#word,
+#resultDiv {
+  font-size: 50px;
+}
+
+input[type=number] /* 속성 셀렉터 : <input>의 type 속성이 text인 경우에 적용 */ {
+  border: 2px solid skyblue;
+  border-radius: 5px;
+  height: 30px;
+}
+
+input[type="number"]:hover {
+  background: aliceblue;
+}
+
+.myButton {
+  box-shadow: inset 0px 1px 0px 0px #efdcfb;
+  background: linear-gradient(to bottom, #dfbdfa 5%, #bc80ea 100%);
+  background-color: #dfbdfa;
+  border-radius: 6px;
+  border: 1px solid #c584f3;
+  display: inline-block;
+  cursor: pointer;
+  color: #ffffff;
+  font-family: Arial;
+  font-size: 15px;
+  font-weight: bold;
+  padding: 6px 24px;
+  text-decoration: none;
+  text-shadow: 0px 1px 0px #9752cc;
+  height: 36px;
+  margin-top: 2px;
+  margin-left: 5px;
+}
+
+.myButton:hover {
+  background: linear-gradient(to bottom, #bc80ea 5%, #dfbdfa 100%);
+  background-color: #bc80ea;
+}
+
+.myButton:active {
+  position: relative;
+  top: 1px;
+}

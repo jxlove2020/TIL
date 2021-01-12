@@ -1,0 +1,25 @@
+.container {
+  width: 100%;
+}
+
+h3 {
+  text-align: center;
+}
+
+#computer {
+  background: url("/images/rps_sprite.png") -5px -5px;
+  width: 200px;
+  height: 200px;
+  margin-bottom: 20px;
+  margin: 20px auto;
+}
+
+.btnGroup {
+  text-align: center;
+}
+
+.btn {
+  width: 70px;
+  padding: 5px;
+  font-size: 20px;
+}
