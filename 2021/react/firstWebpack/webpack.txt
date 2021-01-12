@@ -19,13 +19,14 @@ webpack.config.js 파일
 client.jsx 파일
     const React = Require('react');
     const ReactDom = Require('react-dom');
-
+    
+    class 함수와 
+    ReactDom.render(<WordReplay />, document.querySelector('#root'));
+    추가
 index.html 파일
     head 에 넣던 react 와 react-dom, babel 을 안불러와도 됩니다. 
     body 태그 아래에 작성
     <div id="root"></div>
     <script src="./dist/app.js"></script>
-    class 함수와 
-    ReactDom.render(<WordReplay />, document.querySelector('#root'));
-    추가
+    
 
