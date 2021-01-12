@@ -20,7 +20,7 @@ client.jsx 파일
     const React = Require('react');
     const ReactDom = Require('react-dom');
     
-    // class
+    // class : 클래스 이름 대문자로 시작
     class 클래스이름 extends React.Component {
         state = {
         };
