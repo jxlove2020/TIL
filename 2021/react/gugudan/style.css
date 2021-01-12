@@ -1,0 +1,9 @@
+#root {
+}
+#root > div {
+  margin: 0 auto;
+  text-align: center;
+}
+.question {
+  margin: 20px 0;
+}

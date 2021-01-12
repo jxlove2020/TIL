@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>리액트</title>
+    <!-- 배포시 development 를 production 으로 변경 -->
+    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+</head>
+<body>
+    <div id="root"></div>
+    <script>
+        const e = React.createElement;
+        class LikeButton extends React.Component {
+            constructor(props) {
+                super(props);
+                // 상태 : 데이터
+                this.state = {
+                    liked: false,
+                }
+            }
+            render() {
+                //// <button>Like</button>
+                // return e('button', null, 'Like'); 
+                
+                //// <button onClick="()=> {console.log('clicked')}" type="submit">Like</button>
+                // return e('button', {onClick: () => {console.log('clicked')}, type: 'submit'}, 'Like'); 
+
+                return e('button', {onClick: () => this.setState({liked : true})}, this.state.liked === true ? 'Liked' : 'Like');
+            }
+        }
+    </script>
+    <script>
+        ReactDOM.render(e(LikeButton), document.querySelector('#root'));
+    </script>
+</body>
+</html>
