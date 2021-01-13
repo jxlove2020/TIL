@@ -15,7 +15,16 @@ module.exports = {
             test: /\.jsx?$/, // js 파일과 jsx 파일에 룰을 적용
             loader: 'babel-loader', // jsx , 엣날 문법 
             options: {
-                presets: ['@babel/preset-env', '@babel/preset-react'],
+                presets: [
+                    ['@babel/preset-env', {
+                        targets: {
+                            // https://github.com/browserslist/browserslist
+                            browsers: ['> 5% in KR', 'last 2 chrome versions'], 
+                        },
+                        debug: true,
+                    }], 
+                    '@babel/preset-react',
+                ],
                 plugins: ['@babel/plugin-proposal-class-properties'],
             },
         }],
