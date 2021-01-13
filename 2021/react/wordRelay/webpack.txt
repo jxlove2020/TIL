@@ -23,9 +23,7 @@ babel-loader (바벨이랑 webpack 연결)
 > npm i -D @babel/plugin-proposal-class-properties
 
 webpack.config.js 설정 적용
-
-
-폴더에 파일 생성
+파일 생성
 webpack.config.js 파일
     module.exports = {
 
@@ -45,6 +43,7 @@ client.jsx 파일
     } 
     ReactDom.render(<클래스이름 />, document.querySelector('#root'));
     추가
+
 index.html 파일
     head 에 넣던 react 와 react-dom, babel 을 안불러와도 됩니다. 
     body 태그 아래에 작성

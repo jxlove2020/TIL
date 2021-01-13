@@ -1,5 +1,5 @@
 const path = require('path'); // 폴더의 경로를 알려줌
-
+const RefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 module.exports = {
     name: 'word-relay-setting',
     mode: 'development', // 실서비스 production
@@ -25,13 +25,26 @@ module.exports = {
                     }], 
                     '@babel/preset-react',
                 ],
-                plugins: ['@babel/plugin-proposal-class-properties'],
+                plugins: [
+                    '@babel/plugin-proposal-class-properties',
+                    'react-refresh/babel',
+                ],
             },
         }],
     },
-
+    plugins: [
+        new RefreshWebpackPlugin
+    ],
     output: {
-        path: path.join(__dirname, 'dist'), // __dirname 현재폴더
-        filename: 'app.js'
+        //실제경로
+        path: path.join(__dirname, 'dist'), // __dirname 현재폴더, 
+        filename: 'app.js',
+
+        // publicPath: 가상의 경로라고 생각
+        publicPath: '/dist/',  // webpack-dev-server 에서 필요
     }, // 출력
+    devServer: {
+        publicPath: '/dist/',  // 가상의 경로
+        hot: true,
+    }
 };

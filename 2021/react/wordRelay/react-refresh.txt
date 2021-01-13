@@ -1,0 +1,8 @@
+react-refresh 설치 (react-hotLoader 에서 변경)
+npm i -D react-refresh @pmmmwh/react-refresh-webpack-plugin
+
+개발서버 설정
+npm i -D webpack-dev-server
+
+실행 명령어
+webpack -> "webpack serve --env development" 

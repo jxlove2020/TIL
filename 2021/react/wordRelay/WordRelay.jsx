@@ -3,7 +3,7 @@ const { Component } = React; // react.Component 를 Component로 줄여줌
 
 class WordRelay extends Component {
     state = {
-        word: '강아지',
+        word: '웹팩',
         value: '',
         result: '',
     };
@@ -23,7 +23,7 @@ class WordRelay extends Component {
             });
         }
     };
-    
+
     onChangeInput = (e) => {
         this.setState({ value: e.target.value })
     };
