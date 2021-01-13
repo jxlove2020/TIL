@@ -1,0 +1,40 @@
+
+npm 이 react , react-dom 설치
+> npm i react react-dom
+
+webpack 과 webpack-cli 설치
+> npm i -D webpack webpack-cli
+
+
+@babel/core (바벨 기본적) 과 
+@babel/preset-env (브라우저에 맞게 최신문법 지원) 
+@babel/preset-react (jsx 지원)
+babel-loader (바벨이랑 webpack 연결)
+@babel/plugin-proposal-class-properties (state 사용하려면)
+설치
+> npm i -D @babel/core 
+> npm i -D @babel/preset-env
+> npm i -D @babel/preset-react
+> npm i -D babel-loader
+> npm i -D @babel/plugin-proposal-class-properties
+
+react-refresh 설치 (react-hotLoader 에서 변경)
+> npm i -D react-refresh @pmmmwh/react-refresh-webpack-plugin
+
+개발서버 설정
+> npm i -D webpack-dev-server
+
+======================================
+
+> npm i react react-dom
+> npm i -D webpack webpack-cli
+> npm i -D @babel/core 
+> npm i -D @babel/preset-env
+> npm i -D @babel/preset-react
+> npm i -D babel-loader
+> npm i -D @babel/plugin-proposal-class-properties
+> npm i -D react-refresh @pmmmwh/react-refresh-webpack-plugin
+> npm i -D webpack-dev-server
+
+===============================================
+> npm i -D webpack webpack-cli @babel/core @babel/preset-env @babel/preset-react babel-loader @babel/plugin-proposal-class-properties react-refresh @pmmmwh/react-refresh-webpack-plugin webpack-dev-server
