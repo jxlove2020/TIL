@@ -52,6 +52,7 @@ class NumberBaseball extends Component {
                     answer: getNumbers(),
                     tries: [],
                 });
+                this.input.focus();
             } else {
                 for (let i=0; i<4; i+= 1){
                     if ( answerArray[i] === this.state.answer[i]) {
@@ -66,6 +67,7 @@ class NumberBaseball extends Component {
                         value: '',
                     }                    
                 });
+                this.input.focus();
             }
         }
     };
@@ -73,6 +75,8 @@ class NumberBaseball extends Component {
     onChangeInput = (e) => {
         this.setState({ value: e.target.value })
     };
+
+    input;
     
     onRefInput = (c) => {
         this.input = c;
@@ -84,7 +88,7 @@ class NumberBaseball extends Component {
                 <div>{this.state.result}</div>
                 <div>숫자야구</div>
                 <form onSubmit = {this.onSubmitForm}>
-                    <input maxLength={4} value={this.state.value} onChange={this.onChangeInput} />
+                    <input ref={this.onRefInput} maxLength={4} value={this.state.value} onChange={this.onChangeInput} />
                     <button type="submit">입력</button>
                 </form>
                 <div>횟수 : {this.state.tries.length}</div>
