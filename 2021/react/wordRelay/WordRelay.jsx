@@ -15,12 +15,13 @@ class WordRelay extends Component {
                 word: this.state.value,
                 value: '',
             });
-        }
-        else {
+            this.input.focus();
+        } else {
             this.setState({
                 result: '땡',
                 value: '',
             });
+            this.input.focus();
         }
     };
 
@@ -28,6 +29,8 @@ class WordRelay extends Component {
         this.setState({ value: e.target.value })
     };
     
+    input;
+
     onRefInput = (c) => {
         this.input = c;
     }
