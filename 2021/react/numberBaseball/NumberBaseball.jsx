@@ -25,10 +25,12 @@ class NumberBaseball extends Component {
     onSubmitForm = (e) => {
         e.preventDefault();
         if(this.state.value === this.state.answer.join ('')){
-            this.setState({
-                result: '홈런',
-                // 이전 값 을 복사 후 push 하는 역할 // 참조가 바뀌어야 렌더함수가 새로 실행됨
-                tries: [...this.state.tries, {try: this.state.value, result: '홈런' }],
+            this.setState((prevState) => {
+                return {
+                    result: '홈런',
+                    // 이전 값 을 복사 후 push 하는 역할 // 참조가 바뀌어야 렌더함수가 새로 실행됨
+                    tries: [...prevState.tries, {try: this.state.value, result: '홈런' }],
+                }                
             });
             alert('게임을 다시 시작합니다. ');
             this.setState({
@@ -58,9 +60,11 @@ class NumberBaseball extends Component {
                         ball += 1;
                     }
                 }
-                this.setState({
-                    tries: [...this.state.tries, {try: this.state.value, result: `${strike} 스트라이크, ${ball} 볼입니다.`}],
-                    value: '',
+                this.setState((prevState) => {
+                    return {
+                        tries: [...prevState.tries, {try: this.state.value, result: `${strike} 스트라이크, ${ball} 볼입니다.`}],
+                        value: '',
+                    }                    
                 });
             }
         }
@@ -78,11 +82,12 @@ class NumberBaseball extends Component {
         return (
             <>
                 <div>{this.state.result}</div>
+                <div>숫자야구</div>
                 <form onSubmit = {this.onSubmitForm}>
                     <input maxLength={4} value={this.state.value} onChange={this.onChangeInput} />
                     <button type="submit">입력</button>
                 </form>
-                <div>{this.state.tries.length}</div>
+                <div>횟수 : {this.state.tries.length}</div>
                 <ul>
                     {this.state.tries.map((v, i) => {
                         return (
