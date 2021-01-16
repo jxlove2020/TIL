@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>윈도우 컨트롤</title>
+</head>
+<body>
+    <input type="button" value="open" onclick="winopen();" />
+    <input type="text" onkeypress="winmessage(this.value)" />
+    <input type="button" value="close" onclick="winclose()" />
+    <script>
+    function winopen(){
+        win = window.open('demoWindow.html', 'ot', 'width=300px, height=500px');
+    }
+    // demoWindow 창에 id 가 message 인 엘리먼트에 msg 내용을 바꿔줍니다.
+    function winmessage(msg){
+        win.document.getElementById('message').innerText=msg;
+    }
+    function winclose(){
+        win.close();
+    }
+    </script>
+</body>
+</html>
