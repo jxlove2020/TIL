@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DataBinding</title>
+</head>
+<body>
+    <div id="app">
+        <!-- <p id="abcd1234" class="text-blue">{{num}}</p> -->
+        <p v-bind:id="uuid" v-bind:class="name">{{num}}</p>
+        <p>{{doubleNum}}</p>
+        <div v-if="loading">
+            Loading...
+        </div>
+        <div v-else>
+            test user has been logged in
+        </div>
+        <!-- v-if 와 v-show 의 차이 : v-if 는 안보임, v-show 는 display: none -->
+        <div v-show="loading">
+            Loading...
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                num: 10,
+                uuid: 'abcd1234',
+                name: 'text-blue',
+                loading: true
+            },
+            computed: {
+                doubleNum: function(){
+                    return this.num * 2;
+                }
+            }
+
+        });
+    </script>
+</body>
+</html>

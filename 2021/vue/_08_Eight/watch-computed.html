@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Watch & Computed</title>
+</head>
+<body>
+    <div id="app">
+        <p>{{ num }}</p>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                num: 10
+            },
+            // 가벼운 로직 : watch 보다 computed 권장
+            computed: {
+                doubleNum: function() {
+                    return this.num * 2;
+                }
+            },
+            // 무거운 로직 : data 요청등에 사용
+            watch: {
+                // newValue: 갱신된 값, oldValue : 이전 값
+                num: function(newValue, oldValue) {
+                    this.fetchUserByNumber(newValue);
+                }
+            },
+            methods: {
+                // newValue 값을 num 으로 받아서 출력
+                fetchUserByNumber: function(num) {
+                    console.log('num');
+                    // axios.get(num); 와 같이 database 가져올 때
+                }
+            }
+        });
+    </script>
+</body>
+</html>

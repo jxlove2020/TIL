@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event</title>
+</head>
+<body>
+    <div id="app">
+        <!-- <app-header v-on:하위 컴포넌트에서 발생한 이벤트 이름="상위컴포넌트의 메서드 이름"></app-header> -->
+        <app-header v-on:pass="logText"></app-header>
+        <app-content v-on:increase="increaseNum"></app-content>
+        <!-- {{ num }} 은 data 값 받아와서 뿌려줌 -->
+        <p>{{num}}</p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        // v-on:click 으로 passEvent 라는 메서드 정의 
+        var appHeader = {
+            template: '<button v-on:click="passEvent">click me</button>',
+            methods: {
+                passEvent: function(){
+                    // 이벤트 이름 pass 
+                    this.$emit('pass');
+                }
+            }
+        }
+        var appContent = {
+            template: '<button v-on:click="addNumber">add</button>',
+            methods: {
+                addNumber: function(){
+                    this.$emit('increase');
+                }
+            }
+        }
+        new Vue({
+            el: '#app',
+            components: {
+                'app-header': appHeader,
+                'app-content': appContent
+            },
+            methods: {
+                logText: function(){
+                    console.log('hi');
+                },
+                increaseNum: function(){
+                    this.num += 1;
+                    console.log(this.num);
+                }
+            },
+            data: {
+                num: 10
+            }
+        });
+    </script>
+</body>
+</html>
