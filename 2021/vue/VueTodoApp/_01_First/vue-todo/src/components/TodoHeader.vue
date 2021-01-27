@@ -1,5 +1,5 @@
 <template>
-    <div>Todo It</div>
+    <h1>Todo It</h1>
 </template>
 
 <script>
