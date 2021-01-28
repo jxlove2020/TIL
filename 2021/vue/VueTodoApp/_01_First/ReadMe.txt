@@ -1,6 +1,6 @@
 // VueCLI 를 활용하여 프로젝트 생성
-1. vue create vue-form
-2. cd vue-form
+1. vue create vue-todo
+2. cd vue-todo
 3. npm run serve
 
 components 에서 HelloWorld.vue 삭제
