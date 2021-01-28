@@ -2,9 +2,9 @@
   <div>
     <ul>
       <!-- v-for 를 쓸 경우 v-bind:key 추가 -->
-      <li v-for="todoItem in todoItems" v-bind:key="todoItem" class="shadow">
+      <li v-for="(todoItem, index) in todoItems" v-bind:key="todoItem" class="shadow">
         {{todoItem}}
-        <span class="removeBtn" v-on:click="removeTodo">
+        <span class="removeBtn" v-on:click="removeTodo(todoItem, index)">
           <i class="fas fa-trash-alt"></i>
         </span>
       </li>
@@ -19,7 +19,18 @@ export default {
       todoItems: []
     }
   },
-  // created 라이프 사이클 중 하나.
+  methods: {
+    removeTodo: function(todoItem, index) {
+      console.log(todoItem, index);
+      // 로컬스토리지 삭제 영역
+      // 키 값과 밸류값이 동일하게 설정하였으므로 가능
+      localStorage.removeItem(todoItem);
+      // slice 는 기존 배열을 변경하지 않음, splice 는 해당아이템 지우게 됨
+      this.todoItems.splice(index, 1);
+    }
+  },
+  // created 는 vue 의 라이프 사이클 훅 중 하나.
+  // 자주 사용되는 라이프 사이클 훅 : created, beforeMount, mounted, destroyed
   created: function() {
     if(localStorage.length > 0) {
       for(var i=0; i<localStorage.length; i++){
@@ -57,5 +68,13 @@ export default {
   }
   .checkBtnCompleted {
     color: #b3adad;
+  }
+  .textCompleted {
+    text-decoration: line-through;
+    color: #b3adad;
+  }
+  .removeBtn {
+    margin-left: auto;
+    color: #de4343;
   }
 </style>
