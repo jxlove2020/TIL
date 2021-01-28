@@ -2,8 +2,12 @@
   <div>
     <ul>
       <!-- v-for 를 쓸 경우 v-bind:key 추가 -->
-      <li v-for="(todoItem, index) in todoItems" v-bind:key="todoItem" class="shadow">
-        {{todoItem}}
+      <li v-for="(todoItem, index) in todoItems" v-bind:key="todoItem.item" class="shadow">
+        <i class="checkBtn fas fa-check" v-bind:class="{checkBtnCompleted: todoItem.completed}" v-on:click="toggleComplete(todoItem)"></i>
+        <!-- textCompleted 가 true 이면 클래스 적용 -->
+        <span v-bind:class="{textCompleted: todoItem.completed}" 
+            v-on:click="toggleComplete(todoItem, index)">{{ todoItem.item }}
+        </span>
         <span class="removeBtn" v-on:click="removeTodo(todoItem, index)">
           <i class="fas fa-trash-alt"></i>
         </span>
@@ -27,6 +31,13 @@ export default {
       localStorage.removeItem(todoItem);
       // slice 는 기존 배열을 변경하지 않음, splice 는 해당아이템 지우게 됨
       this.todoItems.splice(index, 1);
+    },
+    toggleComplete: function(todoItem) {
+      // console.log(todoItem, index);
+      todoItem.completed = !todoItem.completed;
+      // 지우고 다시 생성
+      localStorage.removeItem(todoItem.item);
+      localStorage.setItem(todoItem.item, JSON.stringify(todoItem))
     }
   },
   // created 는 vue 의 라이프 사이클 훅 중 하나.
@@ -35,7 +46,9 @@ export default {
     if(localStorage.length > 0) {
       for(var i=0; i<localStorage.length; i++){
         if(localStorage.key(i) !== 'loglevel:webpack-dev-server'){
-          this.todoItems.push(localStorage.key(i));
+          // this.todoItems.push(localStorage.key(i));
+          console.log(JSON.parse(localStorage.getItem(localStorage.key(i))));
+          this.todoItems.push(JSON.parse(localStorage.getItem(localStorage.key(i))));
         }
       }
     }
@@ -43,8 +56,7 @@ export default {
 }
 </script>
 
-<style>
-  /* scoped 사용하지 않음 */ 
+<style scoped>
   ul {
     list-style-type: none;
     padding-left: 0;

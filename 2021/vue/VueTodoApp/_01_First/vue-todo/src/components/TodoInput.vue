@@ -20,9 +20,14 @@ export default {
   }, 
   methods: {
     addTodo: function () {
-      // 로컬 스토리지 저장 ( 키 밸류 동일 )
-      localStorage.setItem(this.newTodoItem, this.newTodoItem);
-      this.clearInput();
+      // 값이 있을 때만 실행
+      if (this.newTodoItem !== ''){
+        var obj = {completed: false, item: this.newTodoItem}
+        // 로컬 스토리지 저장 ( 키 밸류 동일하지만 객체로 전달 )
+        // 로컬스토리지에 저장 : stringify 는 객체를 string 으로 변환 api
+        localStorage.setItem(this.newTodoItem, JSON.stringify(obj));
+        this.clearInput();
+      }
     },
     clearInput: function() {
       this.newTodoItem = '';
