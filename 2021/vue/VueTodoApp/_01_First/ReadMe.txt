@@ -13,6 +13,6 @@ components 에 파일명 두 단어로 조합
 TodoHeader.vue, TodoInput.vue, TodoList.vue, TodoFooter 생성
 vu 탭 해서 파일에 맞게 템플릿 생성
 template 안에 header, input, list, footer 내용 추가
-<header>
-    <h1>Header</h1>
-</header>
+
+첫번째 Todo 앱 에서 로컬스토리지에 저장되는 것이 
+새로 고침을 해야 적용 되는 문제점이 있음.
