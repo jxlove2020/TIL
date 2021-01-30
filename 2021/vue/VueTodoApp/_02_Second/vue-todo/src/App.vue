@@ -8,7 +8,8 @@
       v-bind:propsTodoData="todoItems" 
       v-on:removeItem="removeOneItem"
       v-on:toggleItem="toggleOneItem"></TodoList>
-    <TodoFooter></TodoFooter>
+      <!-- v-on:$emit 받아서 = "메서드 실행" -->
+    <TodoFooter v-on:clearAll="clearAllItems"></TodoFooter>
   </div>
 </template>
 
@@ -59,6 +60,11 @@ export default {
       // 지우고 다시 생성
       localStorage.removeItem(todoItem.item);
       localStorage.setItem(todoItem.item, JSON.stringify(todoItem))
+    },
+    clearAllItems: function() {
+      // 로컬스토리지 데이터 전체 지우기
+      localStorage.clear();
+      this.todoItems = [];
     }
   },
   // created 는 vue 의 라이프 사이클 훅 중 하나.
