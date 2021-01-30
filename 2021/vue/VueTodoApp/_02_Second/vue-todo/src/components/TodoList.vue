@@ -3,7 +3,7 @@
     <ul>
       <!-- v-for 를 쓸 경우 v-bind:key 추가 -->
       <li v-for="(todoItem, index) in propsTodoData" v-bind:key="todoItem.item" class="shadow">
-        <i class="checkBtn fas fa-check" v-bind:class="{checkBtnCompleted: todoItem.completed}" v-on:click="toggleComplete(todoItem)"></i>
+        <i class="checkBtn fas fa-check" v-bind:class="{checkBtnCompleted: todoItem.completed}" v-on:click="toggleComplete(todoItem, index)"></i>
         <!-- textCompleted 가 true 이면 클래스 적용 -->
         <span v-bind:class="{textCompleted: todoItem.completed}" 
             v-on:click="toggleComplete(todoItem, index)">{{ todoItem.item }}
@@ -25,12 +25,9 @@ export default {
       this.$emit('removeItem', todoItem, index);
       
     },
-    toggleComplete: function(todoItem) {
+    toggleComplete: function(todoItem, index) {
       // console.log(todoItem, index);
-      todoItem.completed = !todoItem.completed;
-      // 지우고 다시 생성
-      localStorage.removeItem(todoItem.item);
-      localStorage.setItem(todoItem.item, JSON.stringify(todoItem))
+      this.$emit('toggleItem', todoItem, index);
     }
   },
   
