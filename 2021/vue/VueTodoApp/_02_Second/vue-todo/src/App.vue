@@ -4,7 +4,7 @@
     <!-- <TodoInput v-on:하위컴포넌트에서 발생시킨 이벤트 이름="현재컴포넌트 메서드 명"></TodoInput> -->
     <TodoInput v-on:addTodoItem="addOneItem"></TodoInput>
     <!-- <TodoList v-bind:내려보낼 프롭스 속성이름="현재위치의 컴포넌트 데이터 속성"></TodoList> -->
-    <TodoList v-bind:propsTodoData="todoItems"></TodoList>
+    <TodoList v-bind:propsTodoData="todoItems" v-on:removeItem="removeOneItem"></TodoList>
     <TodoFooter></TodoFooter>
   </div>
 </template>
@@ -42,6 +42,13 @@ export default {
       localStorage.setItem(todoItem, JSON.stringify(obj));
       // push : 자바스크립트 API , 배열에 하나 추가 
       this.todoItems.push(obj);
+    },
+    removeOneItem: function(todoItem, index) {
+      // 로컬스토리지 삭제 영역
+      // 키 값과 밸류값이 동일하게 설정하였으므로 가능
+      localStorage.removeItem(todoItem.item);
+      // slice 는 기존 배열을 변경하지 않음, splice 는 배열의 해당아이템 지우게 됨
+      this.todoItems.splice(index, 1);
     }
   },
   // created 는 vue 의 라이프 사이클 훅 중 하나.

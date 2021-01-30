@@ -21,12 +21,9 @@ export default {
   props: ['propsTodoData'], 
   methods: {
     removeTodo: function(todoItem, index) {
-      console.log(todoItem, index);
-      // 로컬스토리지 삭제 영역
-      // 키 값과 밸류값이 동일하게 설정하였으므로 가능
-      localStorage.removeItem(todoItem.item);
-      // slice 는 기존 배열을 변경하지 않음, splice 는 배열의 해당아이템 지우게 됨
-      this.propsTodoData.splice(index, 1);
+      // console.log(todoItem, index);
+      this.$emit('removeItem', todoItem, index);
+      
     },
     toggleComplete: function(todoItem) {
       // console.log(todoItem, index);
