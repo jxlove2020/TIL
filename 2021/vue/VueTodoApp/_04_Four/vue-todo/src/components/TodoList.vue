@@ -5,10 +5,11 @@
     .list-enter-active, .list-leave-active -->
     <transition-group name="list" tag="ul">
       <!-- v-for 를 쓸 경우 v-bind:key 추가 -->
-      <li v-for="(todoItem, index) in propsTodoData" v-bind:key="todoItem.item" class="shadow">
-        <i class="checkBtn fas fa-check" v-bind:class="{checkBtnCompleted: todoItem.completed}" v-on:click="toggleComplete(todoItem, index)"></i>
+      <li v-for="(todoItem, index) in this.$store.state.todoItems" v-bind:key="todoItem.item" class="shadow">
+        <i class="checkBtn fas fa-check" v-bind:class="{checkBtnCompleted: todoItem.completed}" 
+            v-on:click="toggleComplete(todoItem, index)"></i>
         <!-- textCompleted 가 true 이면 클래스 적용 -->
-        <span v-bind:class="{textCompleted: todoItem.completed}" 
+        <span v-bind:class="{textCompleted: todoItem.completed}"
             v-on:click="toggleComplete(todoItem, index)">{{ todoItem.item }}
         </span>
         <span class="removeBtn" v-on:click="removeTodo(todoItem, index)">
@@ -21,16 +22,17 @@
 
 <script>
 export default {
-  props: ['propsTodoData'], 
   methods: {
     removeTodo(todoItem, index) {
       // console.log(todoItem, index);
-      this.$emit('removeItem', todoItem, index);
+      // this.$emit('removeItem', todoItem, index);
+      this.$store.commit('removeOneItem', {todoItem, index}); // store 의 mutation 함수 실행
       
     },
     toggleComplete(todoItem, index) {
       // console.log(todoItem, index);
-      this.$emit('toggleItem', todoItem, index);
+      // this.$emit('toggleItem', todoItem, index);
+      this.$store.commit('toggleOneItem', {todoItem, index}); // store 의 mutation 함수 실행
     }
   },
   

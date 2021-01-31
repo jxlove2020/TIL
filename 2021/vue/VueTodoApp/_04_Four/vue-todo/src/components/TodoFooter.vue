@@ -11,7 +11,8 @@
 export default {
   methods: {
     clearTodo() {
-      this.$emit('clearAll');
+      // this.$emit('clearAll');
+      this.$store.commit('clearAllItems'); // store 의 mutation 함수 실행/
     }
   }
 }

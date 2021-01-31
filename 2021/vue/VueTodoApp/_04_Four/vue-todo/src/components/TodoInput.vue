@@ -47,7 +47,8 @@ export default {
       // 값이 있을 때만 실행
       if (this.newTodoItem !== ''){
         // this.$emit('이벤트이름', 인자1, 인자2, ...);
-        this.$emit('addTodoItem', this.newTodoItem);
+        // this.$emit('addTodoItem', this.newTodoItem);
+        this.$store.commit('addOneItem', this.newTodoItem); // store 의 mutation 함수 실행
         this.clearInput();
       } else {
         this.showModal = !this.showModal;
