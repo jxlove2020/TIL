@@ -32,7 +32,6 @@ import TodoFooter from './components/TodoFooter.vue'
 
 export default {
   name: 'App',
-  props: ['propsTodoData'],
   data: function() {
     return {
       todoItems: []
