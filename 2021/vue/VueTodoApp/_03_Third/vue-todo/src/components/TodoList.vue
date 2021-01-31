@@ -1,6 +1,9 @@
 <template>
   <div>
-    <ul>
+    <!-- 트랜지션 효과 주기
+    ul 태그에 효과를 준 것이며 name으로 클래스 지정
+    .list-enter-active, .list-leave-active -->
+    <transition-group name="list" tag="ul">
       <!-- v-for 를 쓸 경우 v-bind:key 추가 -->
       <li v-for="(todoItem, index) in propsTodoData" v-bind:key="todoItem.item" class="shadow">
         <i class="checkBtn fas fa-check" v-bind:class="{checkBtnCompleted: todoItem.completed}" v-on:click="toggleComplete(todoItem, index)"></i>
@@ -12,7 +15,7 @@
           <i class="fas fa-trash-alt"></i>
         </span>
       </li>
-    </ul>
+    </transition-group>
   </div>
 </template>
 
@@ -66,5 +69,12 @@ export default {
   .removeBtn {
     margin-left: auto;
     color: #de4343;
+  }
+  .list-enter-active, .list-leave-active {
+    transition: all 1s;
+  }
+  .list-enter, .list-leave-to /* .list-leave-active below version 2.1.8 */ {
+    opacity: 0;
+    transform: translateY(30px);
   }
 </style>
