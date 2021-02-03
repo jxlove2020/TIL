@@ -24,4 +24,6 @@ $ npm install vue-router
 
 src > router > index.js 생성
 
+// axios 추가 
+$ npm install axios
 
