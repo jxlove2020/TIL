@@ -15,5 +15,13 @@ module.exports = {
     lintOnSave: false // 무조건 검사 안함
 }
 
+ESLINT 의 옵션은 껐지만 
+ESLINT 플러그인이 가이드 해주는 부분을 사용하여 
+코딩이 편하게 한다.
+
+// 라우터 추가 
+$ npm install vue-router
+
+src > router > index.js 생성
 
 
