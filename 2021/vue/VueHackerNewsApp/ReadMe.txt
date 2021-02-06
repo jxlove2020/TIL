@@ -27,3 +27,5 @@ src > router > index.js 생성
 // axios 추가 
 $ npm install axios
 
+// vuex 추가
+$ npm install vuex
