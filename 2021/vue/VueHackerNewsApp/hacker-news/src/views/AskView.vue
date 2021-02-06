@@ -1,12 +1,12 @@
 <template>
   <div>
-    <div v-for="(item,i) in ask" :key=i>{{ item.title }}</div> 
+    <div v-for="(item,i) in fetchedAsk" :key=i>{{ item.title }}</div> 
   </div>
 </template>
 
 <script>
 // import { fetchAskList } from '../api/index.js';
-import {mapState} from 'vuex';
+import {mapState, mapGetters} from 'vuex';
 
 export default {
   // data() {
@@ -19,10 +19,21 @@ export default {
     // ask() {
     //   return this.$store.state.ask
     // }, 
+
     // #2
-    ...mapState({
-      ask: state => state.ask
-    })
+    // ...mapState({
+    //   ask: state => state.ask
+    // }),
+
+    // #3
+    // 객체 표기법
+    // ...mapGetters({
+    //   fetchedAsk: 'fetchedAsk'
+    // }),
+    // 배열 표기법
+    ...mapGetters([
+      'fetchedAsk'
+    ])
   },
   created() {
     this.$store.dispatch('FETCH_ASK')
