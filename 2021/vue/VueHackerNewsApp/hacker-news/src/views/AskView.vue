@@ -6,6 +6,7 @@
 
 <script>
 // import { fetchAskList } from '../api/index.js';
+import {mapState} from 'vuex';
 
 export default {
   // data() {
@@ -14,9 +15,14 @@ export default {
   //   }
   // },
   computed: {
-    ask() {
-      return this.$store.state.ask
-    }
+    // #1
+    // ask() {
+    //   return this.$store.state.ask
+    // }, 
+    // #2
+    ...mapState({
+      ask: state => state.ask
+    })
   },
   created() {
     this.$store.dispatch('FETCH_ASK')
