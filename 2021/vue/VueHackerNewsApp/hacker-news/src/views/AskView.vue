@@ -14,7 +14,8 @@
 
 <script>
 // import { fetchAskList } from '../api/index.js';
-import {mapState, mapGetters} from 'vuex';
+// import {mapState, mapGetters} from 'vuex';
+import {mapGetters} from 'vuex';
 
 export default {
   // data() {
