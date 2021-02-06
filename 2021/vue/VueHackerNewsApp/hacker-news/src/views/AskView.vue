@@ -1,9 +1,12 @@
 <template>
   <div>
     <p v-for="(ask,i) in fetchedAsk" :key=i>
-      <a v-bind:href="ask.url">
+      <!-- <a v-bind:href="ask.url">
         {{ ask.title }}
-      </a>
+      </a> -->
+      <router-link :to="`item/${ask.id}`">
+        {{ ask.title }}
+      </router-link>
       <small>{{ ask.time_ago }} by {{ ask.user }}</small>
     </p>
   </div>
