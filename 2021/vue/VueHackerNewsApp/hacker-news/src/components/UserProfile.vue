@@ -7,9 +7,9 @@
           <!-- <router-link :to="`/user/${userInfo.user}`">
             {{ userInfo.id }}
           </router-link> -->
-          <div>{{ userInfo.id }}</div>
+          <div>{{ info.id }}</div>
           <div class="time">
-            {{ userInfo.created }}
+            {{ info.created }}
           </div>
         </div>
       </div>
@@ -17,10 +17,8 @@
 
 <script>
 export default {
-    computed: {
-        userInfo() {
-            return this.$store.state.user;
-        }
+    props: {
+        info: Object
     }
 }
 </script>
