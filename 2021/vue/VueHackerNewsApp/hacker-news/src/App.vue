@@ -22,6 +22,19 @@ export default {
     padding: 0;
     margin: 0;
   }
+
+  a {
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: #42b883;
+    text-decoration: underline;
+  }
+
+  a.router-link-exact-active {
+    text-decoration: underline;
+  }
   
   /* 라우터 트랜지션 */
   .fade-enter-active, .fade-leave-active {
