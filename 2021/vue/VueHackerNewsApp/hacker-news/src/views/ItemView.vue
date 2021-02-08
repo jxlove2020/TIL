@@ -4,7 +4,11 @@
     <div>{{ fetchedItem.content }}</div> -->
     <section>
       <div class="user-container">
-        <div>
+        <user-profile :info="fetchedItem">
+          <div slot="username">{{ fetchedItem.user}}</div>
+          <template slot="time">{{ fetchedItem.time_ago }}</template>
+        </user-profile>
+        <!-- <div>
           <i class="fas fa-user"></i>
         </div>
         <div class="user-description">
@@ -14,8 +18,10 @@
           <div class="time">
             {{ fetchedItem.time_ago }}
           </div>
-        </div>
+        </div> -->
       </div>
+    </section>
+    <section>
         <h2>{{ fetchedItem.title }}</h2>
     </section>
     <section>
@@ -26,9 +32,13 @@
 </template>
 
 <script>
+import UserProfile from '../components/UserProfile.vue'
 import { mapGetters } from 'vuex';
 
 export default {
+  components: {
+    UserProfile,
+  },
   computed: {
     // itemInfo() {
     //   return this.$store.state.item;
