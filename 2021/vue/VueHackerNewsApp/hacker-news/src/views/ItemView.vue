@@ -1,24 +1,13 @@
 <template>
   <div>
-    <!-- <p>{{ fetchedItem.title }}</p>
-    <div>{{ fetchedItem.content }}</div> -->
     <section>
       <div class="user-container">
         <user-profile :info="fetchedItem">
-          <div slot="username">{{ fetchedItem.user}}</div>
-          <template slot="time">{{ fetchedItem.time_ago }}</template>
-        </user-profile>
-        <!-- <div>
-          <i class="fas fa-user"></i>
-        </div>
-        <div class="user-description">
-          <router-link :to="`/user/${fetchedItem.user}`">
-            {{ fetchedItem.user }}
+          <router-link slot="username" :to="`/user/${fetchedItem.user}`">
+            <div>{{ fetchedItem.user}}</div>
           </router-link>
-          <div class="time">
-            {{ fetchedItem.time_ago }}
-          </div>
-        </div> -->
+          <template slot="time">{{ 'Posted : ' + fetchedItem.time_ago }}</template>
+        </user-profile>
       </div>
     </section>
     <section>
@@ -40,9 +29,6 @@ export default {
     UserProfile,
   },
   computed: {
-    // itemInfo() {
-    //   return this.$store.state.item;
-    // }
     ...mapGetters(['fetchedItem'])
   },
   created() {
