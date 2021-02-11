@@ -5,14 +5,43 @@
     <transition name="fade">
       <router-view></router-view>
     </transition>
+    <!-- 스피너 -->
+    <spinner :loading="loadingStatus"></spinner>
   </div>
 </template>
 
 <script>
 import ToolBar from './components/ToolBar.vue';
+import Spinner from './components/Spinner.vue';
+import bus from './utils/bus.js'
+
 export default {
   components: {
     ToolBar,
+    Spinner,
+  },
+  data() {
+    return {
+      loadingStatus: false,
+    };
+  },
+  methods: {
+    startSpinner() {
+      this.loadingStatus = true;
+    },
+    endSpinner() {
+      this.loadingStatus = false;
+    }
+  },
+  // on : addEvent 같은 역할
+  created() {
+    bus.$on('start:spinner', this.startSpinner);
+    bus.$on('end:spinner', this.endSpinner);
+  },
+  // 이벤트 버스 on을 한 경우에는 beforeDestroy에서 off를 꼭 해줘야 이벤트 개체가 쌓이지 않는다.
+  beforeDestroy() {
+    bus.$off('start:spinner', this.startSpinner);
+    bus.$off('end:spinner', this.endSpinner);
   }
 }
 </script>
