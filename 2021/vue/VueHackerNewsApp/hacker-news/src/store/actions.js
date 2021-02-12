@@ -23,35 +23,61 @@ export default {
     },
 
     // FETCH_JOBS (context) {
-    FETCH_JOBS ({commit}) {
-        // distructuring 구조분해
-        return fetchJobsList()
-            .then( ({data}) => {   // .then(response => {
-                // console.log(context);
-                // context.commit('SET_JOBS', response.data);
-                // context.commit('SET_JOBS', data);
-                commit('SET_JOBS', data);
-                })
-                .catch(error => {
-                console.log(error)
-                })
+    // FETCH_JOBS ({commit}) {
+    //     // distructuring 구조분해
+    //     return fetchJobsList()
+    //         .then( ({data}) => {   // .then(response => {
+    //             // console.log(context);
+    //             // context.commit('SET_JOBS', response.data);
+    //             // context.commit('SET_JOBS', data);
+    //             commit('SET_JOBS', data);
+    //             })
+    //             .catch(error => {
+    //             console.log(error)
+    //             })
+    // },
+    async FETCH_JOBS (context) {
+        try {            
+            const response = await fetchJobsList();
+            context.commit('SET_JOBS', response.data);
+            return response;
+        } catch (error) {
+            console.log(error);
+        }
     },
-    FETCH_ASK ({commit}) {
-        return fetchAskList()
-            .then( ({data}) => {   
-                commit('SET_ASK', data);
-                })
-                .catch(error => {
-                console.log(error)
-                })
+
+    // FETCH_ASK ({commit}) {
+    //     return fetchAskList()
+    //         .then( ({data}) => {   
+    //             commit('SET_ASK', data);
+    //             })
+    //             .catch(error => {
+    //             console.log(error)
+    //             })
+    // },
+    async FETCH_ASK (context) {
+        const response = await fetchAskList();
+        context.commit('SET_ASK', response.data);
+        return response;
     },
-    FETCH_LIST ({commit}, pageName) {
-        return fetchList(pageName)
-            .then( response => {
-                commit('SET_LIST', response.data)
-                return response;
-            })
-            .catch(error => console.log(error));
+    // promise
+    // FETCH_LIST ({commit}, pageName) {
+    //     return fetchList(pageName)
+    //         .then( response => {
+    //             commit('SET_LIST', response.data)
+    //             return response;
+    //         })
+    //         .catch(error => console.log(error));
+    // },
+    // async ( context 구조분해 commit 사용 )
+    async FETCH_LIST ({commit}, pageName) {
+        try {
+            const response = fetchList(pageName)
+            commit('SET_LIST', response.data)
+            return response;
+        } catch (error) {
+            console.log(error);
+        }
     },
     FETCH_USER ({commit}, name) {
         return fetchUserInfo(name)
