@@ -72,7 +72,7 @@ export default {
     // async ( context 구조분해 commit 사용 )
     async FETCH_LIST ({commit}, pageName) {
         try {
-            const response = fetchList(pageName)
+            const response = await fetchList(pageName)
             commit('SET_LIST', response.data)
             return response;
         } catch (error) {
