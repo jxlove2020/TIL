@@ -2,7 +2,7 @@ import { fetchJobsList, fetchNewsList, fetchAskList, fetchUserInfo, fetchComment
 
 export default {
     FETCH_NEWS (context) {
-        fetchNewsList()
+        return fetchNewsList()
             .then(response => {
                 // console.log(response.data);
                 // state 에 바로 데이터 접근 할수 없어서
@@ -17,7 +17,7 @@ export default {
     // FETCH_JOBS (context) {
     FETCH_JOBS ({commit}) {
         // distructuring 구조분해
-        fetchJobsList()
+        return fetchJobsList()
             .then( ({data}) => {   // .then(response => {
                 // console.log(context);
                 // context.commit('SET_JOBS', response.data);
@@ -29,7 +29,7 @@ export default {
                 })
     },
     FETCH_ASK ({commit}) {
-        fetchAskList()
+        return fetchAskList()
             .then( ({data}) => {   
                 commit('SET_ASK', data);
                 })
@@ -38,12 +38,15 @@ export default {
                 })
     },
     FETCH_LIST ({commit}, pageName) {
-        fetchList(pageName)
-            .then(({data}) => commit('SET_LIST', data))
+        return fetchList(pageName)
+            .then( response => {
+                commit('SET_LIST', response.data)
+                return response;
+            })
             .catch(error => console.log(error));
     },
     FETCH_USER ({commit}, name) {
-        fetchUserInfo(name)
+        return fetchUserInfo(name)
             .then( ({data}) => {   
                 commit('SET_USER', data);
                 })
@@ -52,7 +55,7 @@ export default {
                 })
     },
     FETCH_ITEM ({commit}, id) {
-        fetchCommentIem(id)
+        return fetchCommentIem(id)
             .then( ({data}) => {   
                 commit('SET_ITEM', data);
                 })
