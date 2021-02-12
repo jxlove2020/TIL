@@ -13,6 +13,9 @@ export default {
   components: {
     ListItem,
   },
+  // mounted() {
+  //   bus.$emit('end:spinner')
+  // },
   mixins: [ListMixin],
   // 믹스인 추가로 created 주석
   // created() {

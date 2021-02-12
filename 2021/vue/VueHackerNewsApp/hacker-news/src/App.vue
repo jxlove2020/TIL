@@ -67,7 +67,7 @@ export default {
   
   /* 라우터 트랜지션 */
   .fade-enter-active, .fade-leave-active {
-    transition: opacity .5s;
+    transition: opacity .3s;
   }
   .fade-enter, .fade-leave-to {
     opacity: 0;
