@@ -3,7 +3,8 @@
 </template>
 
 <script>
-import Chart from 'chart.js'
+// import Chart from 'chart.js'
+// 차트 플러그인 사용으로 인해 주석 처리
 
 export default {
         // 컴포넌트 속성 && 인스턴스 속성
@@ -12,7 +13,8 @@ export default {
         var ctx = this.$refs.lineChart.getContext('2d');
         
         // var lineChart = new Chart(ctx, {
-        new Chart(ctx, {
+        // new Chart(ctx, { // 차트 플러그인 사용으로 인해
+        new this.$_Chart(ctx, {
             // The type of chart we want to create
             type: 'line',
 
