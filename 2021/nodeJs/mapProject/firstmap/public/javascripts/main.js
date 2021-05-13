@@ -26,7 +26,7 @@ let infowindowList = [];
 // 다시 한번 함수를 호출하는 이유는 
 // for 문이 돌면서 함수를 실행해버리면 안되기 때문에 
 // 마커가 클릭되었을 때 실행되게 하려고 
-const getClickhandler = (i) => () => {
+const getClickHandler = (i) => () => {
     const marker = markerList[i];
     const infowindow = infowindowList[i];
 
@@ -35,6 +35,11 @@ const getClickhandler = (i) => () => {
     } else {
         infowindow.open(map, marker);
     }
+}
+
+const getClickMap = (i) => () => {
+    const infowindow = infowindowList[i];
+    infowindow.close();
 }
 
 // data 에 있는 정보를 하나씩 마커표시
@@ -70,5 +75,6 @@ for (let i in data) {
 }
 
 for(let i = 0, ii = markerList.length; i < ii; i++) {
-    naver.maps.Event.addListener(markerList[i], "click", getClickhandler(i));
+    naver.maps.Event.addListener(markerList[i], "click", getClickHandler(i));
+    naver.maps.Event.addListener(map, "click", getClickMap(i));
 }
