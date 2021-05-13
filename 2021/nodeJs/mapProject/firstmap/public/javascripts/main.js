@@ -27,6 +27,10 @@ for (let i in data) {
 
     let marker = new naver.maps.Marker({
         map: map,
-        position: latlng
+        position: latlng,
+        // 마커생성
+        icon: {
+            content: `<div class='marker'></div>`
+        }
     })
 }

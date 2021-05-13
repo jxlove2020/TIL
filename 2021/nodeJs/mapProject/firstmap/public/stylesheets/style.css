@@ -42,3 +42,10 @@ li a {
 li a:hover:not(.active) {
   background-color: #111;
 }
+.marker {
+  width: 15px;
+  height: 15px;
+  background: green;
+  border: 1px solid black;
+  border-radius: 50%;
+}
