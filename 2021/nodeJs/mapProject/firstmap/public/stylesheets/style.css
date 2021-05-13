@@ -1,0 +1,44 @@
+body {
+  padding: 0 !important;
+  margin: 0 !important;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+#map {
+  width: 100vw;
+  height: 100vh;
+}
+
+a {
+  color: #00B7FF;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background: #333;
+  position: fixed;
+  width: 100%;
+  z-index: 1000;
+}
+li:first-child {
+  float: left;
+}
+li:last-child {
+  float: right;
+}
+li a {
+  display: block;
+  color: white;
+  text-decoration: none;
+  text-align: center;
+  padding: 14px 16px;
+}
+.active {
+  background-color: green;
+}
+
+li a:hover:not(.active) {
+  background-color: #111;
+}
