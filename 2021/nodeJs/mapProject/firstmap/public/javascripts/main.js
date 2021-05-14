@@ -72,4 +72,29 @@ $.ajax({
         naver.maps.Event.addListener(markerList[i], "click", getClickHandler(i));
         naver.maps.Event.addListener(map, "click", getClickMap(i));
     }
+
+    // 클러스터링 적용 ( 2개 cluster1, 5개 cluster2, 10개 이상 cluster3 )
+    const cluster1 = {
+        content: `<div class="cluster1"></div>`,
+    }
+    const cluster2 = {
+        content: `<div class="cluster2"></div>`,
+    }
+    const cluster3 = {
+        content: `<div class="cluster3"></div>`,
+    }
+
+    const markerClustering = new MarkerClustering({
+        minClusterSize : 2,
+        maxZoom : 12, // 줌의 최대 레벨
+        map : map, // naver 지도 위에 띄움
+        markers : markerList, 
+        disableClickZoom : false, // 클릭시 줌 기능 활성화
+        gridSize: 20, // 클러스터의 영역 ( 평균 값 : 100 )
+        icons : [ cluster1, cluster2, cluster3 ],
+        indexGernerator: [2, 5, 10], 
+        stylingFunction: (clusterMarker, count) => {
+            $(clusterMarker.getElement()).find("div:first-child").text(count);
+        },
+    });
 })
