@@ -61,7 +61,7 @@ for (let i in data) {
     const content = `
         <div class="infowindow_wrap">
             <div class="infowindow_title">${target.title}</div>
-            <div class="infowindow_title">${target.address}</div>
+            <div class="infowindow_address">${target.address}</div>
         </div>
     `;
     const infowindow = new naver.maps.InfoWindow({
