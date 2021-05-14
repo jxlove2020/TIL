@@ -86,12 +86,12 @@ function displayPlaces(data) {
     map.setBounds(bounds);
 }
 
-function displayInfowindow (marker, place_name, address_name, lat, lng) {
+function displayInfowindow (marker, title, address, lat, lng) {
     let content = `
         <div style="padding: 25px;">
-            ${place_name}<br>
-            ${address_name}<br>
-            <button>등록</button>
+            ${title}<br>
+            ${address}<br>
+            <button onClick="onSubmit('${title}','${address}',${lat},${lng});">등록</button>
         </div>
     `;
     // 해당위치 불러오기
@@ -111,4 +111,19 @@ function removeMarker() {
         markerList[i].setMap(null);
     }
     markerList = [];
+}
+
+function onSubmit(title, address, lat, lng) {
+    // 서버에 요청을 보낼수 있도록 jQuery 의 ajax 사용
+    $.ajax({
+        url : "/location",
+        data: {title, address, lat, lng},
+        type: "POST",
+    }).done((response) => {
+        console.log("데이터 요청 성공");
+        alert("데이터 요청 성공");
+    }).fail((response) => {
+        console.log("데이터 요청 실패");
+        alert("데이터 요청 실패");
+    })
 }
