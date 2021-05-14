@@ -37,12 +37,13 @@ const getClickHandler = (i) => () => {
     }
 }
 
+// 지도 클릭시 인포윈도우 창 닫기
 const getClickMap = (i) => () => {
     const infowindow = infowindowList[i];
     infowindow.close();
 }
 
-// data 에 있는 정보를 하나씩 마커표시
+// data 에 있는 정보를 하나씩 마커표시, 인포윈도우 표시
 for (let i in data) {
     const target = data[i];
     const latlng = new naver.maps.LatLng(target.lat, target.lng);
@@ -74,6 +75,7 @@ for (let i in data) {
     infowindowList.push(infowindow);    
 }
 
+// 각 마커에 대한 클릭 이벤트, 지도 클릭시 인포윈도우창 닫기 이벤트
 for(let i = 0, ii = markerList.length; i < ii; i++) {
     naver.maps.Event.addListener(markerList[i], "click", getClickHandler(i));
     naver.maps.Event.addListener(map, "click", getClickMap(i));
