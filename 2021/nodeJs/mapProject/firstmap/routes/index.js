@@ -33,6 +33,21 @@ router.post('/location', (req, res, next) => {
   });
 });
 
+
+router.get('/location', (req, res, next) => {
+  locationModel.find({}, { _id: 0, __v: 0}).then((result) => {
+    console.log(result);
+    res.json({
+      message: "success",
+      data: result,
+    });
+  }).catch((error) => {
+    res.json({
+      message: "error",
+    });
+  });
+});
+
 // 테스트 API - 포스트 맨에서 확인 ===================================
 router.get('/test', (req, res, next) => {
   console.log("get 테스트 완료")
