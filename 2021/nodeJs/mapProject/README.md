@@ -21,3 +21,9 @@
 ### 서버 켜기 
 - npm start
 - npm run dev
+
+### mongodb 를 사용하기 위해 mongoose 설치
+- npm install mongoose
+- 초기 환경 설정
+    - bin > www 
+    - const mongoose = require("mongoose");

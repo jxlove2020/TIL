@@ -7,6 +7,17 @@
 var app = require('../app');
 var debug = require('debug')('firstmap:server');
 var http = require('http');
+const mongoose = require("mongoose");
+const userConfig = require("../config/userConfig.json");
+
+let db= mongoose.connection;
+db.on("error", console.error);
+db.once("open", () => {
+  console.log("Connected to mongo Server");
+});
+mongoose.connect(
+  `mongodb+srv://joseph:${userConfig.PW}@firstmap.chan2.mongodb.net/firstmap?retryWrites=true&w=majority`, {useNewurlparser:true, useUnifiedTopology:true }
+);
 
 /**
  * Get port from environment and store in Express.
