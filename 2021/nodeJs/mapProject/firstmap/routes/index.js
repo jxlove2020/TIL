@@ -4,11 +4,11 @@ const locationModel = require('../model/location')
 
 /* GET home page. */
 router.get('/', (req, res, next) => {
-  res.render('index', { title: 'Express' });
+  res.render('index', { title: '지도' });
 });
 
 router.get('/upload', (req, res, next) => {
-  res.render('upload', { title: 'Express' });
+  res.render('upload', { title: '업로드' });
 });
 
 // 비구조화 할당 post 방식의 API - 데이터베이스 저장
