@@ -1,6 +1,16 @@
 var mapOptions = {
     center: new naver.maps.LatLng(37.3595704, 127.105399),
-    zoom: 10
+    mapTypeControl: true,
+    mapTypeControlOptions: {
+        style: naver.maps.MapTypeControlStyle.DROPDOWN,
+        position: naver.maps.Position.TOP_RIGHT
+    },
+    zoom: 10,
+    zoomControl: true, // 지도 줌 컨트롤 스타일 지정 ( 버튼 형식 , 위치: 우측상단 )
+    zoomControlOptions: {
+        style: naver.maps.ZoomControlStyle.SMALL,
+        position: naver.maps.Position.TOP_RIGHT
+    }
 };
 
 var map = new naver.maps.Map('map', mapOptions);
