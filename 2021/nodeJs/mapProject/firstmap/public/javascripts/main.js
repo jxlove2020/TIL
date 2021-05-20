@@ -1,15 +1,15 @@
 var mapOptions = {
     center: new naver.maps.LatLng(37.3595704, 127.105399),
-    mapTypeControl: true,
+    mapTypeControl: true, // 지도 형식 (일반-지형도, 위성-겹쳐보기)
     mapTypeControlOptions: {
-        style: naver.maps.MapTypeControlStyle.DROPDOWN,
+        style: naver.maps.MapTypeControlStyle.BUTTON,
         position: naver.maps.Position.TOP_RIGHT
     },
     zoom: 10,
     zoomControl: true, // 지도 줌 컨트롤 스타일 지정 ( 버튼 형식 , 위치: 우측상단 )
     zoomControlOptions: {
         style: naver.maps.ZoomControlStyle.SMALL,
-        position: naver.maps.Position.TOP_RIGHT
+        position: naver.maps.Position.RIGHT_CENTER
     }
 };
 
