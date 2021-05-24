@@ -18,6 +18,8 @@
     <div id="menu_wrap">
         <!-- return false; 는 새로고침이 발생하지 않도록 함 -->
         <form onsubmit="searchPlaces(); return false;">
+            <span>지도중심기준 행정동 주소정보</span><br>
+            <span id="centerAddr"></span><hr>
             키워드 : <input type="text" autocomplete="off" value="강남역" id="keyword" size="15">
             <button type="submit">검색하기</button>
         </form>

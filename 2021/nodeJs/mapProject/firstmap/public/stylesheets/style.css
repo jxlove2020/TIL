@@ -191,3 +191,7 @@ i a:hover:not(.active) {
   z-index: 4;
   position: absolute;
 }
+
+#centerAddr {
+  display:block;margin-top:2px;font-weight: normal;
+}
