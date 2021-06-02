@@ -1,0 +1,59 @@
+sudo apt-get update
+
+sudo apt-get install mysql-server
+
+sudo mysql_secure_installation utility
+
+mysql 시작
+sudo systemctl start mysql
+
+WSL인 경우 mysql 시작
+sudo service mysql start
+
+부팅후에 mysql 자동으로 켜지게 하기
+sudo systemctl enable mysql
+
+WSL인 경우 부팅후에 mysql 자동으로 켜지게 하기
+sudo service mysql enable
+
+sudo mysql
+
+사용자 보기
+SELECT user,authentication_string,plugin,host FROM mysql.user;
+
+root 비밀번호 설정
+mysql 5.7 이전 버전
+UPDATE mysql.user SET Password = PASSWORD('password') WHERE User = 'root';
+
+5.7 버전부터는
+UPDATE mysql.user SET authentication_string = PASSWORD('password') WHERE User = 'root';
+
+FLUSH PRIVILEGES;
+
+SELECT user,authentication_string,plugin,host FROM mysql.user;
+위 command 입력했을 때 root의 plugin이 auth_socket으로 되어 있으면 
+
+mysql_native_password로 바꿔줘야 되는데
+
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
+
+를 했을 때, "Your password does not satisfy the current policy requirment" 가 뜨면
+
+SET GLOBAL validate_password_policy=LOW;
+
+해준 후에 다시 
+
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
+
+하면 된다.
+
+FLUSH PRIVILEGES;
+
+mysql -u root -p
+로 mysql 재접속
+
+사용자 추가
+CREATE USER '사용자 이름'@'localhost' IDENTIFIED BY '비밀 번호';
+
+권한 부여
+GRANT ALL PRIVILEGES ON *.* TO '사용자 이름'@'localhost' WITH GRANT OPTION;
