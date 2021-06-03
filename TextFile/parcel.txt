@@ -1,0 +1,72 @@
+Parcel 기본 템플릿
+
+parcel-bundler: 모듈(패키지) 번들러의 핵심 패키지
+parcel-plugin-static-files-copy: 정적 파일(파비콘, 이미지 등)을 제품(dist) 폴더로 복사
+
+@babel/core: ES6 이상의 코드를 ES5 이하 버전으로 변환
+@babel/preset-env: Babel 지원 스펙을 지정
+@babel/plugin-transform-runtime: Async/Await 문법 지원
+
+sass: SCSS(Sass) 문법을 해석(스타일 전처리기)
+postcss: Autoprefixer 등의 다양한 스타일 후처리기 패키지
+autoprefixer: 스타일에 자동으로 공급 업체 접두사(Vendor prefix)를 적용하는 PostCSS의 플러그인
+
+주의사항!
+package.json 옵션으로 browserslist 추가!
+.postcssrc.js 생성(PostCSS 구성 옵션)!
+.babelrc.js 생성(Babel 구성 옵션)!
+
+
+/* package.json ******************************/
+{
+  "name": "parcel-template-basic",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "parcel index.html",
+    "build": "parcel build index.html"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.13.10",
+    "@babel/plugin-transform-runtime": "^7.13.10",
+    "@babel/preset-env": "^7.13.10",
+    "autoprefixer": "^9.8.6",
+    "parcel-bundler": "^1.12.5",
+    "parcel-plugin-static-files-copy": "^2.6.0",
+    "postcss": "^8.2.8",
+    "sass": "^1.32.8"
+  },
+  "staticFiles": {
+    "staticPath": "static"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions"
+  ]
+}
+
+/* .postcssrc.js ***********************************/
+module.exports = {
+  plugins: [
+    require('autoprefixer')
+  ]
+}
+
+/* .babelrc.js *************************************/
+module.exports = {
+  presets: ['@babel/preset-env'],
+  plugins: [
+    ['@babel/plugin-transform-runtime']
+  ]
+}
+
+/* .gitignore **************************************/
+.cache/
+.idea/
+.DS_Store/
+node_modules/
+dist/
