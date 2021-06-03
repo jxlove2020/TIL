@@ -1,11 +1,29 @@
 git **************************/
 
+// 깃 초기화
 git init
-git add 파일명
-git commit
-git add 파일명
-git commit
 
+// 깃 파일 추가
+git add 파일명
+
+// 깃 커밋 메시지
+git commit -m "메시지"
+
+// 파일 상태 체크
+git status
+
+// 커밋 히스토리 시간순으로 보여줌
 git log
+
+// 깃 보내기
+git push
+// 깃 가져오기
+git full
+
+
+// 깃 설정
 git config --global user.name 이름
 git config --global user.email 이메일
+
+// 설정한 것 확인
+git config --list
