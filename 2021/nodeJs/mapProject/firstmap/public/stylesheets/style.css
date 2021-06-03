@@ -19,8 +19,13 @@ ul#navbar {
 li:first-child {
   float: left;
 }
+li:nth-child(2) {
+  float: right;
+  background-color: lightseagreen;
+}
 li:last-child {
   float: right;
+  background-color: lightseagreen;
 }
 li a {
   display: block;

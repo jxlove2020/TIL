@@ -11,6 +11,10 @@ router.get('/upload', (req, res, next) => {
   res.render('upload', { title: '업로드' });
 });
 
+router.get('/region', (req, res, next) => {
+  res.render('region', { title: '지역' });
+});
+
 // 비구조화 할당 post 방식의 API - 데이터베이스 저장
 router.post('/location', (req, res, next) => {
   const { title, address, lat, lng } = req.body;
