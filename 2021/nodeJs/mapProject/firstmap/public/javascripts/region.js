@@ -116,70 +116,111 @@ const tooltip = $(
 
 tooltip.appendTo(map.getPanes().floatPane);
 
+const regionGeoJsonSi = [];
 const regionGeoJson = [];
 
 naver.maps.Event.once(map, "init_stylemap", () => {
+
   $.ajax({
     url: "https://4cfd7339-9efa-4b2c-9498-f2b81c0bb1d9.mock.pstmn.io/region",
+  }).done((geojsonsi) =>{
+    regionGeoJsonSi.push(JSON.parse(geojsonsi))
+    // console.log(regionGeoJsonSi)
+    startDataLayerSi();
+  });
+  
+  $.ajax({
+    url: "https://4cfd7339-9efa-4b2c-9498-f2b81c0bb1d9.mock.pstmn.io/build",
   }).done((geojson) =>{
     regionGeoJson.push(JSON.parse(geojson))
-    console.log(regionGeoJson)
+    // console.log(regionGeoJson)
     startDataLayer();
   });
+  
 });
 
-function startDataLayer() {
-  map.data.setStyle((feature) => {
-      const styleOptions = {
-        fillColor: "#ff0000",
-        fillOpacity: 0.0001,
-        strokeColor: "#ff0000",
-        strokeWeight: 2,
-        strokeOpacity: 0.4,
-      };
 
-      if(feature.getProperty("focus")) {
-        styleOptions.fillOpacity = 0.6;
-        styleOptions.fillColor = "#0f0";
-        styleOptions.strokeColor = "#0f0";
-        styleOptions.strokeWeight = 4;
-        styleOptions.strokeOpacity = 1;
-      }
+function startDataLayerSi() {
+  map.data.setStyle((feature) => {
+    const styleOptions = {
+      fillColor: "#ff0000",
+      fillOpacity: 0.0001,
+      strokeColor: "#ff0000",
+      strokeWeight: 2,
+      strokeOpacity: 0.4,
+    };
+
+    if(feature.getProperty("focus")) {
+      styleOptions.fillOpacity = 0.6;
+      styleOptions.fillColor = "#0f0";
+      styleOptions.strokeColor = "#0f0";
+      styleOptions.strokeWeight = 4;
+      styleOptions.strokeOpacity = 1;
+    }
 
       return styleOptions;
   });
 
    // 각 행정구역 표시
-   regionGeoJson[0].seoul.forEach((geojson) => {
+  regionGeoJsonSi[0].seoul.forEach((geojsonsi) => {
+    map.data.addGeoJson(geojsonsi);
+  });
+}
+
+function startDataLayer() {
+  map.data.setStyle((feature) => {
+    const styleOptions = {
+      fillColor: "#ff0000",
+      fillOpacity: 0.0001,
+      strokeColor: "#ff0000",
+      strokeWeight: 2,
+      strokeOpacity: 0.4,
+    };
+
+    if(feature.getProperty("focus")) {
+      styleOptions.fillOpacity = 0.6;
+      styleOptions.fillColor = "#0f0";
+      styleOptions.strokeColor = "#0f0";
+      styleOptions.strokeWeight = 4;
+      styleOptions.strokeOpacity = 1;
+    }
+
+      return styleOptions;
+  });
+
+   // 각 건물영역 표시
+
+  regionGeoJson[0].forEach((geojson) => {
+      // console.log(geojson)
     map.data.addGeoJson(geojson);
   });
   
-  map.data.addListener("click", (e) => {
-      let feature = e.feature;
-      if(feature.getProperty("focus") !== true){
-          feature.setProperty("focus", true);
-      } else {
-          feature.setProperty("focus", false);
-      }
-  });
+  // map.data.addListener("click", (e) => {
+  //     let feature = e.feature;
+  //     if(feature.getProperty("focus") !== true){
+  //         feature.setProperty("focus", true);
+  //     } else {
+  //         feature.setProperty("focus", false);
+  //     }
+  // });
 
-  map.data.addListener("mouseover", (e)=> {
-      let feature = e.feature;
-      let regionName = feature.getProperty("SIG_KOR_NM");
-      tooltip.css({
-          display: "block",
-          left: e.offset.x,
-          top: e.offset.y,
-      }).text(regionName);
-      map.data.overrideStyle(feature, {
-          fillOpacity: 0.6,
-          strokeWeight: 4, 
-          strokeOpacity: 1,
-      });
-  });
+  // map.data.addListener("mouseover", (e)=> {
+  //     let feature = e.feature;
+  //     let regionName = feature.getProperty("BLD_NM");
+  //     tooltip.css({
+  //         display: "block",
+  //         left: e.offset.x,
+  //         top: e.offset.y,
+  //     }).text(regionName);
+  //     map.data.overrideStyle(feature, {
+  //         fillOpacity: 0.6,
+  //         strokeWeight: 4, 
+  //         strokeOpacity: 1,
+  //     });
+  // });
 
-  map.data.addListener("mouseout", (e) => {
-      tooltip.hide().empty();
-      map.data.revertStyle();
-  })
+  // map.data.addListener("mouseout", (e) => {
+  //     tooltip.hide().empty();
+  //     map.data.revertStyle();
+  // })
 }
