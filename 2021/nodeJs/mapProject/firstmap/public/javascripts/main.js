@@ -195,3 +195,39 @@ function startDataLayer() {
         map.data.revertStyle();
     })
 }
+
+ // 현재위치 를 1번만 호출할수 있도록 해주는 변수
+ let currentUse = true;
+
+ // 현재위치를 받아오는 함수
+ $('#current').click(() => {
+     console.log(navigator)
+   if ("geolocation" in navigator){
+     navigator.geolocation.getCurrentPosition(function(position){
+       const lat = position.coords.latitude;
+       const lng = position.coords.longitude;
+       const latlng = new naver.maps.LatLng(lat, lng);
+
+       // 현재위치를 1회만 호출
+       if (currentUse) {          
+         marker = new naver.maps.Marker({
+           map: map,
+           position: latlng,
+           icon: {
+             content: '<img class="pulse" draggable="false" unselectable="on" src="images/currentPoint.png">', 
+             anchor: new naver.maps.Point(11,11),
+           }
+         });
+
+         currentUse = false;
+       }
+
+       // 줌 이동하는 애니메이션은 주지 않겠다
+       map.setZoom(14, false);
+       // latlng 위치로 이동
+       map.panTo(latlng);
+     });
+   } else {
+     alert("위치정보사용 불가능");
+   }
+ });
