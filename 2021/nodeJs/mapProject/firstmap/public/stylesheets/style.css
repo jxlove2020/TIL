@@ -94,7 +94,7 @@ i a:hover:not(.active) {
   position: absolute;
   top: 0;
   left: 0;
-  bottom: 0;
+  bottom: 50px;
   width: 200px;
   margin: 50px 0 30px 10px;
   padding: 5px;
@@ -199,4 +199,12 @@ i a:hover:not(.active) {
 
 #centerAddr {
   display:block;margin-top:2px;font-weight: normal;
+}
+#caution{
+  position: absolute;
+  background-color: #eee;
+  padding: 10px;
+  left: 20px;
+  bottom: 20px;
+  z-index: 10;
 }

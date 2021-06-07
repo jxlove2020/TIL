@@ -1,11 +1,12 @@
 var mapOptions = {
-  center: new naver.maps.LatLng(37.3595704, 127.105399),
+  // center: new naver.maps.LatLng(37.3595704, 127.105399),
+  center: new naver.maps.LatLng(37.576874301297416, 127.01259501174434),
   mapTypeControl: true, // 지도 형식 (일반-지형도, 위성-겹쳐보기)
   mapTypeControlOptions: {
       style: naver.maps.MapTypeControlStyle.BUTTON,
       position: naver.maps.Position.TOP_RIGHT
   },
-  zoom: 10,
+  zoom: 19,
   zoomControl: true, // 지도 줌 컨트롤 스타일 지정 ( 버튼 형식 , 위치: 우측상단 )
   zoomControlOptions: {
       style: naver.maps.ZoomControlStyle.SMALL,
@@ -119,6 +120,8 @@ tooltip.appendTo(map.getPanes().floatPane);
 const regionGeoJsonSi = [];
 const regionGeoJson = [];
 
+let tempPnu = "";
+
 naver.maps.Event.once(map, "init_stylemap", () => {
 
   // $.ajax({
@@ -171,6 +174,7 @@ function startDataLayer() {
       let feature = e.feature;
       if(feature.getProperty("focus") !== true){
           feature.setProperty("focus", true);
+        //   console.log(feature.property_PNU)
       } else {
           feature.setProperty("focus", false);
       }
@@ -183,12 +187,26 @@ function startDataLayer() {
           display: "block",
           left: e.offset.x,
           top: e.offset.y,
-      }).text(regionName);
+      }).html(`빌딩명 : ${regionName ?? ""} <br> pnu : ${feature.property_PNU}`);
       map.data.overrideStyle(feature, {
           fillOpacity: 0.6,
           strokeWeight: 4, 
           strokeOpacity: 1,
       });
+
+      if ( tempPnu !== feature.property_PNU){
+        //   console.log(feature.property_PNU)
+          tempPnu = feature.property_PNU;
+        
+        // 응답 형식 을 xml 에서 json 형태로 바꾸고 싶을 때 API 끝에 &_type=json 붙이면 json 형태로 응답을 받을 수 있다. 
+        //   const svckey = "I2IGxHpja6268SDrNKI9jzPD3hHjP1C1yWC%2F6g3tX4eR0A3C8FEXq2O%2FRCLPgoYAmfHTEokxG2aSti2pZwSqHg%3D%3D"
+
+        //   $.ajax({
+        //     url: `http://openapi.molit.go.kr/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcAptTradeDev?serviceKey=${svckey}&pageNo=1&numOfRows=10&LAWD_CD=11110&DEAL_YMD=201512&_type=json`,
+        //   }).done((response) =>{
+        //     console.log(response)
+        //   });
+      }
   });
 
   map.data.addListener("mouseout", (e) => {
