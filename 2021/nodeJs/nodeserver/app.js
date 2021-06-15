@@ -11,6 +11,9 @@ app.use(express.static('public')) // public 폴더안의 파일을 static 파일
 app.use(bodyParser.json()) // json 형태로 주고 받을 때
 app.use(bodyParser.urlencoded({extended: true})) // url 인코딩 된 데이터 주고 받을 때
 
+// view engine ejs 사용
+app.set('view engine', 'ejs')
+
 // route
 app.get('/', function(req, res) {
   res.send("<h1>hello</h1>")
@@ -30,5 +33,9 @@ app.post('/user_post', function(req, res) {
   // get: req.param('email')
   // console.log(req.body) // object 형태
   console.log(req.body.user) 
-  res.send(`<h1>welcome ${req.body.user} </h1>`)
+  // res.send(`<h1>welcome ${req.body.user} </h1>`)
+
+  // ejs view
+  res.render('user.ejs', { 'user': req.body.user })
+
 })
