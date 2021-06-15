@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <form action="/user_post" method="post">
+    사용자: <input type="text" name="user" id="user" />
+    <input type="submit" value="제출">
+  </form>
+  <button class="ajaxsend">ajaxsend</button>
+  
+  <div class="result"></div>
+
+  <script>
+    document.querySelector('.ajaxsend').addEventListener('click', function() {
+      var inputdata = document.forms[0].elements[0].value;
+      sendAjax('http://127.0.0.1:3001/ajax_send_user', inputdata)
+    })
+
+    function sendAjax(url, data) {
+      var data = {'user': data};
+      data = JSON.stringify(data);
+
+      var xhr = new XMLHttpRequest();
+      xhr.open('POST', url);
+      xhr.setRequestHeader('Content-Type', "application/json");
+      xhr.send(data);
+
+      xhr.addEventListener('load', function() {
+        // console.log(xhr.responseText);
+        var result = JSON.parse(xhr.responseText)
+        
+        if(result.result !== "ok") return;
+        document.querySelector(".result").innerHTML = result.user;
+      });
+    }
+  </script>
+</body>
+</html>

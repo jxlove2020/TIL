@@ -37,5 +37,10 @@ app.post('/user_post', function(req, res) {
 
   // ejs view
   res.render('user.ejs', { 'user': req.body.user })
+})
 
+app.post('/ajax_send_user', function(req, res){
+  console.log(req.body.user);
+  var responseData = {'result': 'ok', 'user': req.body.user}
+  res.json(responseData);
 })
