@@ -1,0 +1,17 @@
+{
+  "name": "nodegonggong",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "joseph",
+  "license": "MIT",
+  "dependencies": {
+    "cheerio": "*",
+    "request": "^2.88.2"
+  }
+}
