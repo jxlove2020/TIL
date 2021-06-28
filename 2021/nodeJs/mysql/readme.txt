@@ -14,7 +14,8 @@ CREATE TABLE nodejs.users (
     UNIQUE INDEX name_UNIQUE (name ASC)
 )
 COMMENT = '사용자 정보'
-DEFAULT CHARACTER SET = utf8;
+DEFAULT CHARACTER SET = utf8
+ENGINE = InnoDB;
 
 // comment table // utf8mb4 는 이모티콘 까지 저장 가능 형식
 CREATE TABLE nodejs.comments (
