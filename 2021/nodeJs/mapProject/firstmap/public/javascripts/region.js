@@ -183,30 +183,33 @@ function startDataLayer() {
   map.data.addListener("mouseover", (e)=> {
       let feature = e.feature;
       let regionName = feature.getProperty("BLD_NM");
-      tooltip.css({
-          display: "block",
-          left: e.offset.x,
-          top: e.offset.y,
-      }).html(`빌딩명 : ${regionName ?? ""} <br> pnu : ${feature.property_PNU}`);
-      map.data.overrideStyle(feature, {
-          fillOpacity: 0.6,
-          strokeWeight: 4, 
-          strokeOpacity: 1,
-      });
-
+      let regionText = "";
       if ( tempPnu !== feature.property_PNU){
         //   console.log(feature.property_PNU)
           tempPnu = feature.property_PNU;
-        
-        // 응답 형식 을 xml 에서 json 형태로 바꾸고 싶을 때 API 끝에 &_type=json 붙이면 json 형태로 응답을 받을 수 있다. 
-        //   const svckey = "I2IGxHpja6268SDrNKI9jzPD3hHjP1C1yWC%2F6g3tX4eR0A3C8FEXq2O%2FRCLPgoYAmfHTEokxG2aSti2pZwSqHg%3D%3D"
 
-        //   $.ajax({
-        //     url: `http://openapi.molit.go.kr/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcAptTradeDev?serviceKey=${svckey}&pageNo=1&numOfRows=10&LAWD_CD=11110&DEAL_YMD=201512&_type=json`,
-        //   }).done((response) =>{
-        //     console.log(response)
-        //   });
-      }
+          $.ajax({
+            url: "/testApi",
+            type: "GET"
+          }).done((response) => {
+            console.log(response.data);
+            regionText = JSON.stringify(response.data[0]);
+          
+            tooltip.css({
+              display: "block",
+              left: e.offset.x,
+              top: e.offset.y,
+            }).html(`빌딩명 : ${regionName ?? ""} <br> pnu : ${feature.property_PNU} <br> ${regionText}`);
+            map.data.overrideStyle(feature, {
+                fillOpacity: 0.6,
+                strokeWeight: 4, 
+                strokeOpacity: 1,
+            });
+                    
+          });          
+
+      }   
+
   });
 
   map.data.addListener("mouseout", (e) => {

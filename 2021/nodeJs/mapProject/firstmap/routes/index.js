@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const locationModel = require('../model/location')
+var request = require('request');
 
 /* GET home page. */
 router.get('/', (req, res, next) => {
@@ -49,6 +50,37 @@ router.get('/location', (req, res, next) => {
     res.json({
       message: "error",
     });
+  });
+});
+
+
+router.get('/testApi', (req, res, next) => {
+  // 응답 형식 을 xml 에서 json 형태로 바꾸고 싶을 때 API 끝에 &_type=json 붙이면 json 형태로 응답을 받을 수 있다. 
+  const site = "http://openapi.molit.go.kr/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcAptTradeDev"
+  const svckey = "I2IGxHpja6268SDrNKI9jzPD3hHjP1C1yWC%2F6g3tX4eR0A3C8FEXq2O%2FRCLPgoYAmfHTEokxG2aSti2pZwSqHg%3D%3D";
+  const pageNo = 1;
+  const numOfRows = 10;
+  const LAWD_CD = 11110;
+  const DEAL_YMD = 201512;
+  const url = `${site}?serviceKey=${svckey}&pageNo=${pageNo}&numOfRows=${numOfRows}&LAWD_CD=${LAWD_CD}&DEAL_YMD=${DEAL_YMD}&_type=json`;
+  
+  var dataApi = {};
+
+  request.get(url, (err, response, body) => {
+    if(err) {
+      console.log(`err => ${err}`);
+      dataApi = err;
+    }
+    else {
+      if(response.statusCode === 200) {
+        var result = JSON.parse(body);
+        var data = result.response.body.items.item;
+        // console.log(data);
+        res.json({
+          data,
+        });
+      }
+    }
   });
 });
 
