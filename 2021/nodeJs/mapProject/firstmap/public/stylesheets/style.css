@@ -262,3 +262,12 @@ i a:hover:not(.active) {
   cursor: pointer;
   font-weight: bolder;
 }
+#regionInfo {
+  position: absolute;
+  top: 70px;
+  padding: 20px;
+  z-index: 10000;
+  background: white;
+  width: 300px;
+  display: none;
+}

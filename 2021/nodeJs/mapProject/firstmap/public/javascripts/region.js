@@ -112,10 +112,12 @@ $.ajax({
 
 // 행정구역 지도 나누기
 const tooltip = $(
-  `<div style="position:absolute; z-index:1000; padding: 5px 10px; background: white; border: 1px solid black; font-size: 14px; display: none; ponter-events: none"></div>`
+  `<div style="position:absolute; z-index:100; padding: 5px 10px; background: white; border: 1px solid black; font-size: 14px; display: none; ponter-events: none"></div>`
 );
+const regionInfo = $(`<div id="regionInfo"></div>`);
 
 tooltip.appendTo(map.getPanes().floatPane);
+regionInfo.appendTo(map.getPanes().floatPane);
 
 const regionGeoJsonSi = [];
 const regionGeoJson = [];
@@ -192,20 +194,40 @@ function startDataLayer() {
             url: "/testApi",
             type: "GET"
           }).done((response) => {
-            console.log(response.data);
-            regionText = JSON.stringify(response.data[0]);
-          
+            console.log(response.data[0]);
+            console.log(JSON.stringify(response.data[0]).replaceAll('",', '"|').replaceAll(',"', '|"'));
+            regionText = JSON.stringify(response.data[0]).replaceAll('",', '"|').replaceAll(',"', '|"');
+            // console.log(1, regionText);
+            regionTextArr = regionText.replace("{", "").replace("}", "").split("|");
+            // console.log(2, regionTextArr);
+
+            const arrRT = [];
+            regionTextArr.forEach(element => {
+              // console.log(element);
+              arrRT.push(element)
+            });
+
+            // console.log(arrRT)
+            let regionTextAll = "";
+            for (let i=0; i<arrRT.length; i++){
+              regionTextAll += arrRT[i].replaceAll('"', ' ') + " <br>";
+            }
+            console.log(regionTextAll);
+            
             tooltip.css({
               display: "block",
               left: e.offset.x,
               top: e.offset.y,
-            }).html(`빌딩명 : ${regionName ?? ""} <br> pnu : ${feature.property_PNU} <br> ${regionText}`);
+            }).html(`빌딩명 : ${regionName ?? ""} <br> pnu : ${feature.property_PNU}`);
             map.data.overrideStyle(feature, {
                 fillOpacity: 0.6,
                 strokeWeight: 4, 
                 strokeOpacity: 1,
             });
-                    
+
+            regionInfo.css({
+              display: "block"
+            }).html(`pnu : ${feature.property_PNU} <br> ${regionTextAll}`);
           });          
 
       }   
@@ -214,6 +236,7 @@ function startDataLayer() {
 
   map.data.addListener("mouseout", (e) => {
       tooltip.hide().empty();
+      regionInfo.hide().empty();
       map.data.revertStyle();
   })
 }
