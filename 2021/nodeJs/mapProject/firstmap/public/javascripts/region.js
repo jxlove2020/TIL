@@ -112,7 +112,7 @@ $.ajax({
 
 // 행정구역 지도 나누기
 const tooltip = $(
-  `<div style="position:absolute; z-index:100; padding: 5px 10px; background: white; border: 1px solid black; font-size: 14px; display: none; ponter-events: none"></div>`
+  `<div style="position:absolute; z-index:100; padding: 5px 10px; background: white; border: 1px solid black; font-size: 14px; display: none; pointer-events: none"></div>`
 );
 const regionInfo = $(`<div id="regionInfo"></div>`);
 
