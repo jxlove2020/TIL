@@ -1,3 +1,4 @@
+
 var mapOptions = {
     center: new naver.maps.LatLng(37.3595704, 127.105399),
     mapTypeControl: true, // 지도 형식 (일반-지형도, 위성-겹쳐보기)
@@ -113,6 +114,8 @@ $.ajax({
 const urlPrefix = "https://navermaps.github.io/maps.js/docs/data/region";
 const urlSuffix = ".json"
 
+const url = "/mainApi"
+
 let regionGeoJson = [];
 let loadCount = 0;
 
@@ -123,21 +126,29 @@ const tooltip = $(
 tooltip.appendTo(map.getPanes().floatPane);
 
 naver.maps.Event.once(map, "init_stylemap", () => {
-    for(let i=1; i<18; i++){
-        let keyword = i.toString();
-        if(keyword.length === 1) {
-            keyword = "0" + keyword;
-        }
-        $.ajax({
-            url: urlPrefix + keyword + urlSuffix,
-        }).done((geojson) =>{
-            regionGeoJson.push(geojson);
-            loadCount++;
-            if(loadCount === 17) {
-                startDataLayer();
-            }
-        });
-    }
+    // for(let i=1; i<18; i++){
+    //     let keyword = i.toString();
+    //     if(keyword.length === 1) {
+    //         keyword = "0" + keyword;
+    //     }
+    //     $.ajax({
+    //         url: urlPrefix + keyword + urlSuffix,
+    //     }).done((geojson) =>{
+    //         regionGeoJson.push(geojson);
+    //         loadCount++;
+    //         if(loadCount === 17) {
+    //             startDataLayer();
+    //         }
+    //     });
+    // }
+
+    $.ajax({
+        url: url,
+    }).done((geojson) =>{
+        console.log(geojson.data.response.result.featureCollection);
+        regionGeoJson.push(geojson.data.response.result.featureCollection);
+        startDataLayer();
+    });
 });
 
 function startDataLayer() {
@@ -177,7 +188,8 @@ function startDataLayer() {
 
     map.data.addListener("mouseover", (e)=> {
         let feature = e.feature;
-        let regionName = feature.getProperty("area1");
+        // let regionName = feature.getProperty("area1");
+        let regionName = feature.getProperty("ctp_kor_nm");
         tooltip.css({
             display: "block",
             left: e.offset.x,

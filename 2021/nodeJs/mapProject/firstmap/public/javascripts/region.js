@@ -1,12 +1,12 @@
 var mapOptions = {
-  // center: new naver.maps.LatLng(37.3595704, 127.105399),
-  center: new naver.maps.LatLng(37.576874301297416, 127.01259501174434),
+  // center: new naver.maps.LatLng(37.3595704, 127.105399)
+  center: new naver.maps.LatLng(37.524960, 127.066463),
   mapTypeControl: true, // 지도 형식 (일반-지형도, 위성-겹쳐보기)
   mapTypeControlOptions: {
       style: naver.maps.MapTypeControlStyle.BUTTON,
       position: naver.maps.Position.TOP_RIGHT
   },
-  zoom: 19,
+  zoom: 14,
   zoomControl: true, // 지도 줌 컨트롤 스타일 지정 ( 버튼 형식 , 위치: 우측상단 )
   zoomControlOptions: {
       style: naver.maps.ZoomControlStyle.SMALL,
@@ -122,24 +122,23 @@ regionInfo.appendTo(map.getPanes().floatPane);
 const regionGeoJsonSi = [];
 const regionGeoJson = [];
 
-let tempPnu = "";
-
 naver.maps.Event.once(map, "init_stylemap", () => {
 
   // $.ajax({
   //   url: "https://4cfd7339-9efa-4b2c-9498-f2b81c0bb1d9.mock.pstmn.io/region",
   // }).done((geojsonsi) =>{
   //   regionGeoJsonSi.push(JSON.parse(geojsonsi))
-  //   // console.log(regionGeoJsonSi)
+  //   console.log(regionGeoJsonSi)
   //   startDataLayerSi();
   // });
   
+  const url = "/regionApi"
   $.ajax({
-    url: "https://4cfd7339-9efa-4b2c-9498-f2b81c0bb1d9.mock.pstmn.io/build",
+    url: url,
   }).done((geojson) =>{
-    regionGeoJson.push(JSON.parse(geojson))
-    // console.log(regionGeoJson)
-    startDataLayer();
+      console.log(geojson.data.response.result.featureCollection.features);
+      regionGeoJson.push(geojson.data.response.result.featureCollection.features);
+      startDataLayer();
   });
 
 });
@@ -184,53 +183,56 @@ function startDataLayer() {
 
   map.data.addListener("mouseover", (e)=> {
       let feature = e.feature;
-      let regionName = feature.getProperty("BLD_NM");
+      let regionName = feature.getProperty("emd_kor_nm");
+      let regionCode = feature.getProperty("emd_cd");
+
       let regionText = "";
-      if ( tempPnu !== feature.property_PNU){
-        //   console.log(feature.property_PNU)
-          tempPnu = feature.property_PNU;
 
-          $.ajax({
-            url: "/testApi",
-            type: "GET"
-          }).done((response) => {
-            console.log(response.data[0]);
-            console.log(JSON.stringify(response.data[0]).replaceAll('",', '"|').replaceAll(',"', '|"'));
-            regionText = JSON.stringify(response.data[0]).replaceAll('",', '"|').replaceAll(',"', '|"');
-            // console.log(1, regionText);
-            regionTextArr = regionText.replace("{", "").replace("}", "").split("|");
-            // console.log(2, regionTextArr);
+      let filterCode = regionCode.slice(5);
 
-            const arrRT = [];
-            regionTextArr.forEach(element => {
-              // console.log(element);
-              arrRT.push(element)
-            });
+      $.ajax({
+        url: "/testApi",
+        type: "GET"
+      }).done((response) => {
+        console.log(regionCode);
+        console.log(filterCode);
+        console.log(response.data);
+        console.log(response.data.filter( dt => dt["법정동읍면동코드"] === Number(filterCode + "00") ));
+        filterData = response.data.filter( dt => dt["법정동읍면동코드"] === Number(filterCode + "00") );
+        console.log(JSON.stringify(filterData[0]).replaceAll('",', '"|').replaceAll(',"', '|"'));
+        regionText = JSON.stringify(filterData[0]).replaceAll('",', '"|').replaceAll(',"', '|"');
+        // console.log(1, regionText);
+        regionTextArr = regionText.replace("{", "").replace("}", "").split("|");
+        // console.log(2, regionTextArr);
 
-            // console.log(arrRT)
-            let regionTextAll = "";
-            for (let i=0; i<arrRT.length; i++){
-              regionTextAll += arrRT[i].replaceAll('"', ' ') + " <br>";
-            }
-            console.log(regionTextAll);
-            
-            tooltip.css({
-              display: "block",
-              left: e.offset.x,
-              top: e.offset.y,
-            }).html(`빌딩명 : ${regionName ?? ""} <br> pnu : ${feature.property_PNU}`);
-            map.data.overrideStyle(feature, {
-                fillOpacity: 0.6,
-                strokeWeight: 4, 
-                strokeOpacity: 1,
-            });
+        const arrRT = [];
+        regionTextArr.forEach(element => {
+          // console.log(element);
+          arrRT.push(element)
+        });
 
-            regionInfo.css({
-              display: "block"
-            }).html(`pnu : ${feature.property_PNU} <br> ${regionTextAll}`);
-          });          
+        // console.log(arrRT)
+        let regionTextAll = "";
+        for (let i=0; i<arrRT.length; i++){
+          regionTextAll += arrRT[i].replaceAll('"', ' ') + " <br>";
+        }
+        console.log(regionTextAll);
+        
+        tooltip.css({
+          display: "block",
+          left: e.offset.x,
+          top: e.offset.y,
+        }).html(`읍면동 : ${regionName ?? ""} <br> regionCode : ${regionCode}`);
+        map.data.overrideStyle(feature, {
+            fillOpacity: 0.6,
+            strokeWeight: 4, 
+            strokeOpacity: 1,
+        });
 
-      }   
+        regionInfo.css({
+          display: "block"
+        }).html(`읍면동 : ${regionName ?? ""} <br> regionCode : ${regionCode} <hr> <br> ${regionTextAll}`);
+      });  
 
   });
 
