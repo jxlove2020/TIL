@@ -114,10 +114,9 @@ $.ajax({
 const tooltip = $(
   `<div style="position:absolute; z-index:100; padding: 5px 10px; background: white; border: 1px solid black; font-size: 14px; display: none; pointer-events: none"></div>`
 );
-const regionInfo = $(`<div id="regionInfo"></div>`);
+const regionInfo = $(document.getElementById("regionInfo"));
 
 tooltip.appendTo(map.getPanes().floatPane);
-regionInfo.appendTo(map.getPanes().floatPane);
 
 const regionGeoJsonSi = [];
 const regionGeoJson = [];
@@ -230,7 +229,9 @@ function startDataLayer() {
         });
 
         regionInfo.css({
-          display: "block"
+          display: "block",
+          left: 0,
+          top: 70 + "px",
         }).html(`읍면동 : ${regionName ?? ""} <br> regionCode : ${regionCode} <hr> <br> ${regionTextAll}`);
       });  
 

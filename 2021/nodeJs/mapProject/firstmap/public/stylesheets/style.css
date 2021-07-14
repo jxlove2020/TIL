@@ -40,7 +40,9 @@ li a {
 i a:hover:not(.active) {
   background-color: #111;
 }
-
+#wrap {
+  position: relative;
+}
 #map {
   width: 100vw;
   height: calc( 100vh - 44px );
