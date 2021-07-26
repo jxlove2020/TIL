@@ -1,26 +1,45 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"
+    />
     <title><%=title%></title>
-    <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=ql5e7uxlee"></script>
-    <link rel="stylesheet" href="/stylesheets/style.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=bcda4227b00a71e6406ab99970cb7ac1&libraries=services"></script>
-</head>
-<body>
-  <ul id="navbar">
-    <li><a href="/">Map</a></li>
-    <li><a href="/region">region</a></li>
-    <li><a href="/upload">upload</a></li>
-  </ul>
-  <div id="map"></div>
-  <div id="current">현재위치</div>
-  <div id="caution">본 서비스에서 제공하는 정보는 법적인 효력이 없으며, 참고용으로만 활용하시기 바랍니다. </div>
+    <script
+      type="text/javascript"
+      src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=ql5e7uxlee"
+    ></script>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      type="text/javascript"
+      src="//dapi.kakao.com/v2/maps/sdk.js?appkey=bcda4227b00a71e6406ab99970cb7ac1&libraries=services"
+    ></script>
+  </head>
+  <body>
+    <ul id="navbar">
+      <li><a href="/">Map</a></li>
+      <li><a href="/region">region</a></li>
+      <li><a href="/upload">upload</a></li>
+    </ul>
+    <div id="map"></div>
+    <div id="current">현재위치</div>
+    <div id="caution">
+      본 서비스에서 제공하는 정보는 법적인 효력이 없으며, 참고용으로만
+      활용하시기 바랍니다.
+    </div>
 
-  <script type="text/javascript" src="/javascripts/MarkerClustering.js"></script>
-  <script type="text/javascript" src="/javascripts/main.js"></script>
-</body>
+    <script
+      type="text/javascript"
+      src="/javascripts/MarkerClustering.js"
+    ></script>
+    <script type="text/javascript" src="/javascripts/main.js"></script>
+  </body>
 </html>
